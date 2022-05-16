@@ -56,10 +56,31 @@ and open the template in the editor.
                   </div>
                 </div>
             </nav>
-            <p id="info" class="text-success w-100 d-flex justify-content-center"></p>
+            <p class="text-success w-100 d-flex justify-content-center"></p>
         </header>
         <main class="container-fluid flex-grow-1">
             <div id="content" class="d-flex justify-content-center">
+                <div class="card border-light my-5" style="width: 30rem;">
+                    <div class="card-body">
+                        <form action="login" method="POST">
+                            <fieldset>
+                              <legend>Авторизация</legend>
+                              <div class="form-group mb-3">
+                                <label for="login">Логин</label>
+                                <input type="text" class="form-control" id="login" name="login" aria-describedby="login" placeholder="">
+                                <small id="login" class="form-text text-muted d-none">Это поле не должно быть пустым</small>
+                              </div>
+                              <div class="form-group mb-3">
+                                <labelpassword">Пароль</label>
+                                <input type="password" class="form-control" id="password" name="password" aria-describedby="password" placeholder="">
+                                <small id="password" class="form-text text-muted d-none">Это поле не должно быть пустым</small>
+                              </div>
+                              <button type="submit" class="btn btn-primary mt-4">Войти</button>
+                              <p class="text-info w-100 text-center my-3">Нет логина? <a href="showRegistration">Зарегистрироваться</a></p>
+                            </fieldset>
+                       </form>
+                    </div>
+                </div>
             </div>
         </main>
         <footer class="footer w-100 text-center bg-primary mt-auto text-white" style="min-height: 30px">
