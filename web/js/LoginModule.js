@@ -19,7 +19,8 @@ class LoginModule{
                     .then(response =>{
                         if(response.status){
                             document.getElementById('info').innerHTML=response.info;
-                            alert("Привет!!!");
+                            sessionStorage.setItem('authUser', JSON.stringify(response.user));
+                            sessionStorage.setItem('role', JSON.stringify(response.role));
                         }else{
                             document.getElementById('info').innerHTML=response.info;
                         }
