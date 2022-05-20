@@ -1,4 +1,4 @@
-
+import {checkMenu} from './App.js';
 class LoginModule{
     login(){
         const userLogin = document.getElementById('login').value;
@@ -21,6 +21,7 @@ class LoginModule{
                             document.getElementById('info').innerHTML=response.info;
                             sessionStorage.setItem('authUser', JSON.stringify(response.user));
                             sessionStorage.setItem('role', JSON.stringify(response.role));
+                            checkMenu();
                         }else{
                             document.getElementById('info').innerHTML=response.info;
                         }

@@ -1,7 +1,7 @@
 "use strict";
 
 import {viewModule} from './ViewModule.js';
-
+export {checkMenu};
 const newAuthor = document.getElementById('menu_new_author');
 newAuthor.addEventListener('click',(e)=>{
     e.preventDefault();
@@ -63,4 +63,84 @@ function hiddenMenuLogout(){
     document.getElementById('menu_login').classList.remove('d-none');
     toggleMenuActive();
     document.getElementById('content').innerHTML = '';
+}
+function checkMenu(){
+    const userRole = JSON.parse(sessionStorage.getItem('role'));
+    if(userRole === null){
+        if(!newBook.classList.contains('d-none')){
+            newBook.classList.add('d-none');
+        }
+        if(!buyBook.classList.contains('d-none')){
+            buyBook.classList.add('d-none');
+        }
+        if(!profile.classList.contains('d-none')){
+            profile.classList.add('d-none');
+        }
+        if(!adminPanel.classList.contains('d-none')){
+            adminPanel.classList.add('d-none');
+        }
+        if(menuLogin.classList.contains('d-none')){
+            menuLogin.classList.remove('d-none');
+        }
+        if(!menuLogout.classList.contains('d-none')){
+            menuLogout.classList.add('d-none');
+        }
+    }else if('READER'===userRole){
+        if(!newBook.classList.contains('d-none')){
+            newBook.classList.add('d-none');
+        }
+        if(buyBook.classList.contains('d-none')){
+            buyBook.classList.remove('d-none');
+        }
+        if(profile.classList.contains('d-none')){
+            profile.classList.remove('d-none');
+        }
+        if(!adminPanel.classList.contains('d-none')){
+            adminPanel.classList.add('d-none');
+        }
+        if(!menuLogin.classList.contains('d-none')){
+            menuLogin.classList.add('d-none');
+        }
+        if(menuLogout.classList.contains('d-none')){
+            menuLogout.classList.remove('d-none');
+        }
+    }else if('MANAGER'===userRole){
+        if(newBook.classList.contains('d-none')){
+            newBook.classList.remove('d-none');
+        }
+        if(buyBook.classList.contains('d-none')){
+            buyBook.classList.remove('d-none');
+        }
+        if(profile.classList.contains('d-none')){
+            profile.classList.remove('d-none');
+        }
+        if(!adminPanel.classList.contains('d-none')){
+            adminPanel.classList.add('d-none');
+        }
+        if(!menuLogin.classList.contains('d-none')){
+            menuLogin.classList.add('d-none');
+        }
+        if(menuLogout.classList.contains('d-none')){
+            menuLogout.classList.remove('d-none');
+        }
+    }else if('ADMINISTRATOR'===userRole){
+        if(newBook.classList.contains('d-none')){
+            newBook.classList.remove('d-none');
+        }
+        if(buyBook.classList.contains('d-none')){
+            buyBook.classList.remove('d-none');
+        }
+        if(profile.classList.contains('d-none')){
+            profile.classList.remove('d-none');
+        }
+        if(adminPanel.classList.contains('d-none')){
+            adminPanel.classList.remove('d-none');
+        }
+        if(!menuLogin.classList.contains('d-none')){
+            menuLogin.classList.add('d-none');
+        }
+        if(menuLogout.classList.contains('d-none')){
+            menuLogout.classList.remove('d-none');
+        }
+    }
 }

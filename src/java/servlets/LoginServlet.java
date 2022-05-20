@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
             reader.setFirstname("admin");
             reader.setLastname("admin");
             reader.setPhone("565456545");
+            reader.setMoney("100");
             readerFacade.create(reader);
             user.setReader(reader);
             userFacade.create(user);
