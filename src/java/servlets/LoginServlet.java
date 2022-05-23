@@ -35,7 +35,8 @@ import tools.EncryptPassword;
  * @author teacher
  */
 @WebServlet(name = "LoginServlet", loadOnStartup = 1, urlPatterns = {
-    "/login"
+    "/login",
+    "/logout"
 })
 public class LoginServlet extends HttpServlet {
     @EJB ReaderFacade readerFacade;
@@ -60,7 +61,7 @@ public class LoginServlet extends HttpServlet {
             reader.setFirstname("admin");
             reader.setLastname("admin");
             reader.setPhone("565456545");
-            reader.setMoney("10.00");
+            reader.setMoney("100");
             readerFacade.create(reader);
             user.setReader(reader);
             userFacade.create(user);
@@ -137,6 +138,17 @@ public class LoginServlet extends HttpServlet {
                 String json = job.build().toString();
                 try (PrintWriter out = response.getWriter()) {
                     out.println(json);
+                }
+                break;
+            case "/logout":
+                session = request.getSession(false);
+                if(session != null){
+                    session.invalidate();
+                }
+                job.add("status", "true");
+                job.add("info", "You are logout");
+                try (PrintWriter out = response.getWriter()){
+                    out.println(job.build().toString());
                 }
                 break;
             

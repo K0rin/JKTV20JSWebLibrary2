@@ -1,11 +1,14 @@
 "use strict";
 
 import {viewModule} from './ViewModule.js';
-
+import {loginModule} from './LoginModule.js';
+//import {managerModule} from './ManagerModule.js';
+export {checkMenu};
 const newAuthor = document.getElementById('menu_new_author');
 newAuthor.addEventListener('click',(e)=>{
     e.preventDefault();
     toggleMenuActive('menu_new_author');
+    viewModule.showNewAuthorForm();
 });
 const newBook = document.getElementById('menu_new_book');
 newBook.addEventListener('click',(e)=>{
@@ -30,13 +33,12 @@ adminPanel.addEventListener('click',(e)=>{
 const menuLogin = document.getElementById('menu_login');
 menuLogin.addEventListener('click',(e)=>{
     e.preventDefault();
-    hiddenMenuLogin();
     viewModule.showLoginForm();
 });
 const menuLogout = document.getElementById('menu_logout');
 menuLogout.addEventListener('click',(e)=>{
     e.preventDefault();
-    hiddenMenuLogout();
+    loginModule.logout();
 });
 
 function toggleMenuActive(selectedElementId){
@@ -53,95 +55,113 @@ function toggleMenuActive(selectedElementId){
         }
     }
 }
-function hiddenMenuLogin(){
-    document.getElementById('menu_login').classList.add('d-none');
-    document.getElementById('menu_logout').classList.remove('d-none');
-    toggleMenuActive();
-}
-function hiddenMenuLogout(){
-    document.getElementById('menu_logout').classList.add('d-none');
-    document.getElementById('menu_login').classList.remove('d-none');
-    toggleMenuActive();
-    document.getElementById('content').innerHTML = '';
-}
-
+//function hiddenMenuLogin(){
+//    document.getElementById('menu_login').classList.add('d-none');
+//    document.getElementById('menu_logout').classList.remove('d-none');
+//    toggleMenuActive();
+//}
+//function hiddenMenuLogout(){
+//    document.getElementById('menu_logout').classList.add('d-none');
+//    document.getElementById('menu_login').classList.remove('d-none');
+//    toggleMenuActive();
+//    document.getElementById('content').innerHTML = '';
+//}
 function checkMenu(){
     const userRole = JSON.parse(sessionStorage.getItem('role'));
-    if(userRole == null){
-        if(!newBook.classList.contain('d-none')){
+    if(userRole === null){
+        if(!newBook.classList.contains('d-none')){
             newBook.classList.add('d-none');
         }
-        if(!buyBook.classList.contain('d-none')){
+        if(!newAuthor.classList.contains('d-none')){
+            newAuthor.classList.add('d-none');
+        }
+        if(!buyBook.classList.contains('d-none')){
             buyBook.classList.add('d-none');
         }
-        if(!profile.classList.contain('d-none')){
+        if(!profile.classList.contains('d-none')){
             profile.classList.add('d-none');
         }
-        if(!adminPanel.classList.contain('d-none')){
+        if(!adminPanel.classList.contains('d-none')){
             adminPanel.classList.add('d-none');
         }
-        if(!menuLogin.classList.contain('d-none')){
-            menuLogin.classList.add('d-none');
+        if(menuLogin.classList.contains('d-none')){
+            menuLogin.classList.remove('d-none');
         }
-        if(menuLogin.classList.contain('d-none')){
-            menuLogin.classList.add('d-none');
+        if(!menuLogout.classList.contains('d-none')){
+            menuLogout.classList.add('d-none');
         }
+        return;
     }else if('READER'===userRole){
-        if(!newBook.classList.contain('d-none')){
+        if(!newBook.classList.contains('d-none')){
             newBook.classList.add('d-none');
         }
-        if(!buyBook.classList.contain('d-none')){
+        if(!newAuthor.classList.contains('d-none')){
+            newAuthor.classList.add('d-none');
+        }
+        if(buyBook.classList.contains('d-none')){
             buyBook.classList.remove('d-none');
         }
-        if(!profile.classList.contain('d-none')){
+        if(profile.classList.contains('d-none')){
             profile.classList.remove('d-none');
         }
-        if(!adminPanel.classList.contain('d-none')){
+        if(!adminPanel.classList.contains('d-none')){
             adminPanel.classList.add('d-none');
         }
-        if(!menuLogin.classList.contain('d-none')){
+        if(!menuLogin.classList.contains('d-none')){
             menuLogin.classList.add('d-none');
         }
-        if(menuLogin.classList.contain('d-none')){
-            menuLogin.classList.remove('d-none');
+        if(menuLogout.classList.contains('d-none')){
+            menuLogout.classList.remove('d-none');
         }
+        
     }else if('MANAGER'===userRole){
-        if(!newBook.classList.contain('d-none')){
+        if(newBook.classList.contains('d-none')){
             newBook.classList.remove('d-none');
         }
-        if(!buyBook.classList.contain('d-none')){
+        if(newAuthor.classList.contains('d-none')){
+            newAuthor.classList.remove('d-none');
+        }
+        if(buyBook.classList.contains('d-none')){
             buyBook.classList.remove('d-none');
         }
-        if(!profile.classList.contain('d-none')){
+        if(profile.classList.contains('d-none')){
             profile.classList.remove('d-none');
         }
-        if(!adminPanel.classList.contain('d-none')){
+        if(!adminPanel.classList.contains('d-none')){
             adminPanel.classList.add('d-none');
         }
-        if(!menuLogin.classList.contain('d-none')){
+        if(!menuLogin.classList.contains('d-none')){
             menuLogin.classList.add('d-none');
         }
-        if(menuLogin.classList.contain('d-none')){
-            menuLogin.classList.remove('d-none');
+        if(menuLogout.classList.contains('d-none')){
+            menuLogout.classList.remove('d-none');
         }
+        
     }else if('ADMINISTRATOR'===userRole){
-        if(!newBook.classList.contain('d-none')){
+        if(newBook.classList.contains('d-none')){
             newBook.classList.remove('d-none');
         }
-        if(!buyBook.classList.contain('d-none')){
+        if(newAuthor.classList.contains('d-none')){
+            newAuthor.classList.remove('d-none');
+        }
+        if(buyBook.classList.contains('d-none')){
             buyBook.classList.remove('d-none');
         }
-        if(!profile.classList.contain('d-none')){
+        if(profile.classList.contains('d-none')){
             profile.classList.remove('d-none');
         }
-        if(!adminPanel.classList.contain('d-none')){
+        if(adminPanel.classList.contains('d-none')){
             adminPanel.classList.remove('d-none');
         }
-        if(!menuLogin.classList.contain('d-none')){
-            menuLogin.classList.remove('d-none');
+        if(!menuLogin.classList.contains('d-none')){
+            menuLogin.classList.add('d-none');
         }
-        if(menuLogin.classList.contain('d-none')){
-            menuLogin.classList.remove('d-none');
+        if(menuLogout.classList.contains('d-none')){
+            menuLogout.classList.remove('d-none');
         }
     }
+    
+    
 }
+
+checkMenu();
